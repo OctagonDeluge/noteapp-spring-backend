@@ -2,6 +2,7 @@ package com.example.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,8 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "schedules")
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Schedule {
 
     @Id
@@ -31,7 +31,7 @@ public class Schedule {
     private Date event_date;
     //private Long user_id;
 
-    @OneToMany(mappedBy = "schedule")
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE, orphanRemoval = true)
     //@JsonManagedReference
     @JsonIgnore
     private List<Event> events;

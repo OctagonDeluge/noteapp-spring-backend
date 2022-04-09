@@ -6,6 +6,8 @@ import com.example.application.service.ScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URISyntaxException;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,7 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public List<Schedule> getSchedules(@RequestParam String beginOfMonth, @RequestParam String endOfMonth) {
+    public List<Long> getSchedules(@RequestParam String beginOfMonth, @RequestParam String endOfMonth) {
         return scheduleService.getSchedulesForMonth(beginOfMonth, endOfMonth);
     }
 
@@ -28,10 +30,14 @@ public class ScheduleController {
         return scheduleService.getTodayEvent(currentDate);
     }
 
-    @PostMapping("")
-    public ResponseEntity test(@RequestParam String date, @RequestParam String content) {
-        scheduleService.addEvent(date, content);
-        return ResponseEntity.ok("dw");
+    @PostMapping
+    public ResponseEntity<Event> test(@RequestParam String date, @RequestParam String content) throws URISyntaxException {
+        return scheduleService.addEvent(date, content);
+    }
+
+    @DeleteMapping("/{date}")
+    public void delete(@PathVariable String date) {
+        scheduleService.deleteSchedule(date);
     }
 }
 

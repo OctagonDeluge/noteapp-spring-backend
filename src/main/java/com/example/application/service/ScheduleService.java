@@ -5,9 +5,13 @@ import com.example.application.entity.Schedule;
 import com.example.application.repository.ScheduleRepository;
 import com.example.application.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 /*
 * delete
@@ -25,11 +29,19 @@ public class ScheduleService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Schedule> getSchedulesForMonth(String beginOfMonth, String endOfMonth) {
-        return scheduleRepository.findAllByMonth(
+    public List<Long> getSchedulesForMonth(String beginOfMonth, String endOfMonth) {
+        List<Schedule> schedules = scheduleRepository.findAllByMonth(
                 new Date(Long.parseLong(beginOfMonth)),
                 new Date(Long.parseLong(endOfMonth))
         );
+
+        List<Long> timestamps = new ArrayList<>();
+        for (Schedule schedule:
+             schedules) {
+            timestamps.add(schedule.getEvent_date().getTime());
+        }
+
+        return timestamps;
     }
 
     public List<Event> getTodayEvent(String currentDate) {
@@ -38,7 +50,7 @@ public class ScheduleService {
         return eventRepository.findByScheduleId(schedule.getId());
     }
 
-    public void addEvent(String date, String content) {
+    public ResponseEntity<Event> addEvent(String date, String content) throws URISyntaxException {
         Schedule schedule =
                 scheduleRepository.findByDate(new Date(Long.parseLong(date)));
         if(schedule != null) {
@@ -46,6 +58,7 @@ public class ScheduleService {
             event.setSchedule(schedule);
             event.setContent(content);
             eventRepository.save(event);
+            return ResponseEntity.created(new URI("/calendar/"+date)).body(event);
         } else {
             schedule = new Schedule();
             schedule.setEvent_date(new Date(Long.parseLong(date)));
@@ -54,6 +67,7 @@ public class ScheduleService {
             event.setSchedule(schedule);
             event.setContent(content);
             eventRepository.save(event);
+            return ResponseEntity.created(new URI("/calendar/"+date)).body(event);
         }
     }
 
@@ -63,8 +77,8 @@ public class ScheduleService {
         eventRepository.save(event);
     }
 
-    public void deleteEvent(Long id) {
-        Event event = eventRepository.findById(id).get();
-        eventRepository.delete(event);
+    public void deleteSchedule(String date) {
+        Schedule schedule = scheduleRepository.findByDate(new Date(Long.parseLong(date)));
+        scheduleRepository.delete(schedule);
     }
 }

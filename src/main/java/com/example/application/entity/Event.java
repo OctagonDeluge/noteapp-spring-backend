@@ -1,18 +1,15 @@
 package com.example.application.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "events")
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Event {
 
     @Id
@@ -30,7 +27,6 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "schedule_id")
-    //@JsonBackReference
     @JsonIgnore
     private Schedule schedule;
 }
