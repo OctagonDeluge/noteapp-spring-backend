@@ -6,9 +6,11 @@ import com.example.application.entity.User;
 import com.example.application.repository.RoleRepository;
 import com.example.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +29,21 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User registration(User user) {
-        Role role = roleRepository.findByName(RoleName.USER);
-        List<Role> userRoles = new ArrayList<>();
-        userRoles.add(role);
+    public ResponseEntity<?> registration(User user)  {
+        if(userRepository.findByEmail(user.getEmail()) == null) {
+            Role role = roleRepository.findByName(RoleName.USER);
+            List<Role> userRoles = new ArrayList<>();
+            userRoles.add(role);
 
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(userRoles);
-        user.setValid(true);
-
-        return userRepository.save(user);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setRoles(userRoles);
+            user.setValid(true);
+            userRepository.save(user);
+            return ResponseEntity.ok("User successfully registered");
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "User with such email already exists");
+        }
     }
 
     public List<User> getUsers() {

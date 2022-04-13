@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "events")
@@ -23,6 +24,7 @@ public class Event {
             allocationSize = 1
     )
     private Long id;
+    @NotEmpty
     private String content;
 
     @ManyToOne

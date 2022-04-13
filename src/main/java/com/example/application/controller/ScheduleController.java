@@ -1,13 +1,12 @@
 package com.example.application.controller;
 
 import com.example.application.entity.Event;
-import com.example.application.entity.Schedule;
 import com.example.application.service.ScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URISyntaxException;
-import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -31,13 +30,13 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> test(@RequestParam String date, @RequestParam String content) throws URISyntaxException {
+    public ResponseEntity<Event> addEvent(@RequestParam String date,@Valid @RequestParam String content) throws URISyntaxException {
         return scheduleService.addEvent(date, content);
     }
 
     @DeleteMapping("/{date}")
-    public void delete(@PathVariable String date) {
-        scheduleService.deleteSchedule(date);
+    public ResponseEntity<String> deleteSchedule(@PathVariable String date) {
+        return scheduleService.deleteSchedule(date);
     }
 }
 

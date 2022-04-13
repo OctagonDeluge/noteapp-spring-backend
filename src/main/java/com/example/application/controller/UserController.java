@@ -1,20 +1,18 @@
 package com.example.application.controller;
 
 import com.example.application.entity.User;
-import com.example.application.repository.UserRepository;
 import com.example.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -22,8 +20,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<String> userRegistration(@RequestBody User user) {
-        userService.registration(user);
-        return ResponseEntity.ok("Saved");
+    public ResponseEntity<?> userRegistration(@Valid @RequestBody User user) {
+        return userService.registration(user);
     }
+
 }

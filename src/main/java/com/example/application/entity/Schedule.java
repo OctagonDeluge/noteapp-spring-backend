@@ -29,13 +29,12 @@ public class Schedule {
     )
     private Long id;
     private Date event_date;
-    //private Long user_id;
 
     @OneToMany(mappedBy = "schedule", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    //@JsonManagedReference
     @JsonIgnore
     private List<Event> events;
 
-    //@ManyToOne
-    //private User user;
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 }

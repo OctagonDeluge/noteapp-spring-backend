@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class NoteController {
     }
 
     @PostMapping
-    public ResponseEntity<Note> save(@RequestBody Note note) throws URISyntaxException {
+    public ResponseEntity<Note> save(@Valid @RequestBody Note note) throws URISyntaxException {
         return noteService.saveNote(note);
     }
 
@@ -36,7 +37,7 @@ public class NoteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Note> update(@PathVariable Long id, @RequestBody Note note) {
+    public ResponseEntity<Note> update(@PathVariable Long id, @Valid @RequestBody Note note) {
         return noteService.update(id, note);
     }
 }

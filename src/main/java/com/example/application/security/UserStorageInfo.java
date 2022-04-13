@@ -2,7 +2,6 @@ package com.example.application.security;
 
 import com.example.application.entity.User;
 import com.example.application.repository.UserRepository;
-import com.example.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,8 +19,12 @@ public class UserStorageInfo implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findByEmail(email);
-        return new SecurityUser(user.getEmail(), user.getPassword(), user.isValid(), user.getRoles());
+        if(user != null) {
+            return new SecurityUser(user.getEmail(), user.getPassword(), user.isValid(), user.getRoles());
+        } else {
+            throw new UsernameNotFoundException("User with such email not found");
+        }
     }
 }

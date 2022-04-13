@@ -1,9 +1,11 @@
 package com.example.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "notes")
@@ -21,6 +23,13 @@ public class Note {
             allocationSize = 1
     )
     private long id;
+    @NotEmpty
     private String caption;
+    @NotEmpty
     private String content;
+
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+
 }
