@@ -30,7 +30,7 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> addEvent(@RequestParam String date,@Valid @RequestParam String content) throws URISyntaxException {
+    public ResponseEntity<Event> addEvent(@RequestParam String date, @RequestParam String content) throws URISyntaxException {
         return scheduleService.addEvent(date, content);
     }
 

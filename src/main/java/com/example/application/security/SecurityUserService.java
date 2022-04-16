@@ -9,12 +9,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserStorageInfo implements UserDetailsService {
+public class SecurityUserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserStorageInfo(UserRepository userRepository) {
+    public SecurityUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

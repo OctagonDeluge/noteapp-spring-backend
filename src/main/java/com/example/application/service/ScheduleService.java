@@ -3,7 +3,7 @@ package com.example.application.service;
 import com.example.application.entity.Event;
 import com.example.application.entity.Schedule;
 import com.example.application.entity.User;
-import com.example.application.exception.EventNotFoundException;
+import com.example.application.exception.EventIsEmptyException;
 import com.example.application.exception.ScheduleNotFoundException;
 import com.example.application.repository.ScheduleRepository;
 import com.example.application.repository.EventRepository;
@@ -58,7 +58,9 @@ public class ScheduleService {
     }
 
     public ResponseEntity<Event> addEvent(String date, String content) throws URISyntaxException {
-
+        if(content.isEmpty()) {
+            throw new EventIsEmptyException();
+        }
         Schedule schedule =
                 scheduleRepository.findByDate(new Date(Long.parseLong(date)));
         if(schedule != null) {
@@ -93,10 +95,4 @@ public class ScheduleService {
         return ResponseEntity.ok("Deleted");
     }
 
-    public void updateEvent(Long id, String content) {
-        Event event = eventRepository.findById(id)
-                .orElseThrow(()->new EventNotFoundException());
-        event.setContent(content);
-        eventRepository.save(event);
-    }
 }
