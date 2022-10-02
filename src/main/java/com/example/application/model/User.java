@@ -9,3 +9,4 @@ public class User {
     private String username;
     private boolean authorized;
 }
+

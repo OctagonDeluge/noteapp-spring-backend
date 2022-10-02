@@ -16,5 +16,4 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     @Query("SELECT s FROM Schedule s WHERE s.event_date BETWEEN ?1 AND ?2 AND s.user.email = ?#{principal?.username}")
     List<Schedule> findAllByMonth(Date beginOfMonth, Date endOfMonth);
-
 }

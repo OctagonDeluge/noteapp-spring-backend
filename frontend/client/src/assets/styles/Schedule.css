@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+.main {
+    display:flex;
+    flex-direction:row;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.events {
+    width: 25%;
+    background: #920EB7A0;
+}
+
+.events .dateContainer {
+    margin-top: 100px;
+    height: 15%;
+    width: 350px;
+}
+
+.events .dateHeader {
+    font-family: 'Arial', serif;
+    font-size: 32px;
+    color: #FFFFFFFF;
+    margin-left: 40px;
+}
+
+.events input {
+    border: 0;
+    outline: 0;
+    border-bottom: solid;
+    background: 0;
+    padding: 0;
+    font-size: 18px;
+    border-bottom-color: black;
+    border-bottom-width: 1px;
+    color: black;
+    width: 90%;
+}
+
+.events .add {
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #540080a3;
+    height: 25px;
+    width: 25px;
+    margin-left: 5px
+}
+
+.events .delete {
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #7E224F9E;
+    height: 30px;
+    width: 150px;
+    margin-top: 20px;
+}
+
+.events .eventCard {
+    height: 40px;
+    border-bottom: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: black;
+    background-color: #91858500;
+}

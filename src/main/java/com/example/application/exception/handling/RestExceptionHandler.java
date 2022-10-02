@@ -1,5 +1,9 @@
-package com.example.application.exception;
+package com.example.application.exception.handling;
 
+import com.example.application.exception.EventIsEmptyException;
+import com.example.application.exception.EventNotFoundException;
+import com.example.application.exception.NoteNotFoundException;
+import com.example.application.exception.ScheduleNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;

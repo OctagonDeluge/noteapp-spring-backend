@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+
+.main {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.profileSection {
+
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.noteCard {
+    width: 25%;
+    height: 100vh;
+}
+
+.noteCard .caption {
+    height: 20%;
+    background: #bf9aca;
+}
+
+.noteCard button {
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background: #F1E8E8FF;
+    width: 100%;
+    height: 5%;
+    font-size: 16px;
+}
+
+.noteCard button:hover {
+    background: #947386;
+}
+
+.noteCard .note {
+    height: 130px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.noteCard .note:hover {
+    background: #e8d5e8;
+}
+
+.textRedactor {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 70%;
+    background: #F1E5E5FF
+}
+
+.textRedactor .toolBox {
+    width: 800px;
+    height: 100px;
+}
+
+.toolBox button {
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    background: #f1ffc4;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.toolBox button:hover {
+    background: #9f6451;
+}
+
+.textRedactor .inputs {
+    display: flex;
+    justify-content: center;
+}
+
+.textRedactor .inputs .sub-inputs {
+    width: 80%;
+}
+
+.sub-inputs input {
+    margin-top: 20px;
+}
+
+.sub-inputs textarea {
+    margin-top: 10px;
+}
