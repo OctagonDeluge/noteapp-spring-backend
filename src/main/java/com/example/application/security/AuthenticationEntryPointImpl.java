@@ -1,6 +1,7 @@
 package com.example.application.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -19,7 +20,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         errors.put("timestamp", new Date());
         errors.put("status", 401);
         errors.put("error", "Unauthorized");
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         try {
             ObjectMapper mapper = new ObjectMapper();
